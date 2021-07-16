@@ -25,6 +25,3 @@ const Company = ({ stock }) => {
 }
 
 export default Company
-
-
-

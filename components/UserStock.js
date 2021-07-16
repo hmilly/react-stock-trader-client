@@ -1,28 +1,28 @@
-import React, { useState, useContext } from 'react'
-import BuySell from "./BuySell"
+import React, { useContext} from 'react'
 import { store } from "../context"
+import UserStockDetails from "./UserStockDetails"
 
-const UserStock = ({ company, buyprice, quantity }) => {
+const UserStock = ({ company }) => {
     const { state } = useContext(store)
 
     return (
         <div className="user-stock">
-            <div className="stock-name">
-                <h4>{company}:</h4>
-                <h4>{quantity}</h4>
-            </div>
+            <h4 className="stock-name">{company}:</h4>
             <div className="stock-price">
-                <h4>bought at:</h4>
-                <h4>{buyprice}</h4>
+
+                {state.stockArr.length === 0
+                    ? ""
+                    : state.stockArr.map(a => {
+                        return a.stockName.match(company)
+                            ? a.details.map(data =>
+                                <UserStockDetails quantity={data.quantity} price={data.price} />
+                            )
+                            : ""
+                    })
+                }
             </div>
-            <BuySell
-                btnName={"Sell"}
-                stockPrice={buyprice}
-            />
         </div>
     )
 }
 
 export default UserStock
-
-

@@ -9,8 +9,6 @@ const User = ({ setName, balance, transactions }) => {
         return t.map(s =>
             <UserStock
                 company={s.shareName}
-                buyprice={s.priceOnPurchase}
-                quantity={s.quantity}
             />
         )
     }

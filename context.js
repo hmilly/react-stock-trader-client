@@ -32,29 +32,23 @@ const AppState = ({ children }) => {
 
 
     const setArr = (obj) => {
-
         const findStock = state.stockArr.find(s => s.stockName.match(obj.stockName))
-        console.log(findStock)
         if (!findStock) {
-            dispatchArr(obj)
+            dispatchArr(state.stockArr, obj)
         } else {
-
-
-
-            // dispatchArr({ ...obj, quantity: findStock.quantity + obj.quantity })
-
-
-
-            
+            const allObjects = state.stockArr
+            const index = allObjects.indexOf(findStock)
+            let edited = allObjects.splice(index, 1)
+            edited = { ...findStock, details: [...findStock.details, ...obj.details]}
+            dispatchArr(allObjects, edited)
         }
     }
 
-    const dispatchArr = (arr) => {
+    const dispatchArr = (arr, obj) => {
         dispatch({
             type: "SETARR",
-            payload: [...state.stockArr, arr]
+            payload: [...arr, obj]
         })
-        console.log(state.stockArr)
     }
 
     const setBalance = (equation) => {

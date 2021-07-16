@@ -77,13 +77,27 @@ body, #root{
             grid-template-columns: repeat(auto-fit, minmax(110px, 1fr));
             gap: 10px;
 
-            .stock-name, .stock-price{
+            .stock-name{
                 display: grid;
                 grid-template-columns
                 : repeat(auto-fit, minmax(60px, 1fr));
                 margin: 10px auto;
+            }
+            .stock-price{
+                display: grid;
+                grid-template-rows
+                : repeat(auto-fit, minmax(1fr));
+                margin: 10px auto;
                 h4{
                 margin: 10px auto;
+                }
+                div{
+                display: grid;
+                    grid-template-columns: 1fr 1fr 1fr;
+                    grid-template-rows: 20px;
+                    p{
+                        margin: 0 auto;
+                    }
                 }
             }
             .btns{
@@ -97,6 +111,22 @@ body, #root{
                 div{
                 display: grid;
                 grid-template-columns: repeat(auto-fit, minmax(15px, 1fr));
+                input{
+                    color: black;
+                    font-size: 18px;
+                    text-align: center;
+                }
+                input::-webkit-inner-spin-button,
+                input::-webkit-outer-spin-button{
+                -webkit-appearance:none;
+                }
+                }
+                .Buy{
+                    background-color: rgb(74, 123, 6);
+                }
+                .Buy:hover{
+                    cursor: pointer;
+                    background-color: rgba(130, 216, 9, 0.892);
                 }
             }
         }
@@ -118,26 +148,10 @@ body, #root{
 
 
 .Sell{
+    color: white;
     background-color: rgb(111, 12, 38);
 }
 .Sell:hover{
     cursor: pointer;
     background-color: rgba(197, 41, 83, 0.8929);
-}
-.Buy{
-    background-color: rgb(74, 123, 6);
-}
-.Buy:hover{
-    cursor: pointer;
-    background-color: rgba(130, 216, 9, 0.892);
-}
-
-.quantity{
-    color: black;
-    font-size: 18px;
-    text-align: center;
-}
-.quantity::-webkit-inner-spin-button,
-.quantity::-webkit-outer-spin-button{
--webkit-appearance:none;
 }

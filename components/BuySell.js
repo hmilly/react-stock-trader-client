@@ -3,35 +3,19 @@ import { store } from "../context"
 
 const BuySell = ({ btnName, stockPrice, stockName }) => {
     const { state, setBalance, setArr } = useContext(store)
-
     const [quantity, setQuantity] = useState(0)
 
-
-    const buyStock = (quantity, stockPrice, state, stockName) => {
-        const equation = state.balance - (quantity * stockPrice)
-        if (equation >= 0) {
+    const buyStock = (e, quantity, stockPrice, state, stockName) => {
+        e.preventDefault()
+        const equation = state.balance - (quantity * stockPrice).toFixed(2)
+        if (equation > 0) {
             setBalance(equation)
+            setArr({ stockName: stockName, details: [{ quantity: quantity, price: stockPrice }] })
             setQuantity(0)
-            setArr({stockName: stockName, quantity: quantity, boughtAt: stockPrice})
         } else {
             console.log("not enough money")
         }
     }
-
-    const sellStock = () => {
-
-    }
-
-
-
-    const buyOrSell = (e) => {
-        e.preventDefault()
-        e.target.className === "Buy"
-            ? buyStock(quantity, stockPrice, state, stockName)
-            : sellStock(e)
-    }
-
-
 
     const plus = (e) => {
         e.preventDefault()
@@ -46,10 +30,10 @@ const BuySell = ({ btnName, stockPrice, stockName }) => {
         <div className="btns">
             <div>
                 <button className="Sell" onClick={(e) => minus(e)}>-</button>
-                <input className="quantity" min="0" name="quantity" value={quantity} type="number" readOnly />
+                <input min="0" name="quantity" value={quantity} type="number" readOnly />
                 <button className="Buy" onClick={(e) => plus(e)}>+</button>
             </div>
-            <button className={btnName} onClick={(e) => buyOrSell(e, quantity)}>{btnName}</button>
+            <button className="Buy" onClick={(e) => buyStock(e, quantity, stockPrice, state, stockName)}>{btnName}</button>
         </div>
     )
 }
