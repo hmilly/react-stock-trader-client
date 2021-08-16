@@ -1,1 +1,1 @@
-# r
+# react-stock-trader-client
