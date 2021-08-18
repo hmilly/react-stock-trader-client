@@ -1,5 +1,5 @@
 import React,
-{ createContext, useEffect, useReducer, useState }
+{ createContext, useReducer }
     from 'react';
 
 const initialState = {
@@ -24,6 +24,11 @@ const AppState = ({ children }) => {
                     ...state,
                     balance: action.payload
                 }
+            case 'REMOVE':
+                return {
+                    ...state,
+                    stockArr: action.payload
+                }
             default:
                 return state
         }
@@ -32,15 +37,19 @@ const AppState = ({ children }) => {
 
 
     const setArr = (obj) => {
+
         const findStock = state.stockArr.find(s => s.stockName.match(obj.stockName))
         if (!findStock) {
-            dispatchArr(state.stockArr, obj)
+            console.log(obj)
+            dispatchArr(state.stockArr, { ...obj, details: [{ id: 1, ...obj.details[0] }] })
         } else {
             const allObjects = state.stockArr
             const index = allObjects.indexOf(findStock)
             let edited = allObjects.splice(index, 1)
-            edited = { ...findStock, details: [...findStock.details, ...obj.details]}
-            dispatchArr(allObjects, edited)
+            const n = { id: findStock.details.length+1, ...obj.details[0] }
+
+            edited = { ...findStock, details: [...findStock.details, n] }
+             dispatchArr(allObjects, edited)
         }
     }
 
@@ -58,11 +67,20 @@ const AppState = ({ children }) => {
         })
     }
 
+    const removeFromArr = (details) => {
+        console.log(details)
+        // dispatch({
+        //     type: "REMOVE",
+        //     payload: details
+        // })
+    }
+
     return <Provider
         value={{
             state,
             setArr,
-            setBalance
+            setBalance,
+            removeFromArr
         }}>
         {children} </Provider>;
 };

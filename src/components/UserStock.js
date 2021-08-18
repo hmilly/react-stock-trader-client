@@ -15,7 +15,7 @@ const UserStock = ({ company }) => {
                     : state.stockArr.map(a => {
                         return a.stockName.match(company)
                             ? a.details.map(data =>
-                                <UserStockDetails quantity={data.quantity} price={data.price} />
+                                <UserStockDetails id={a} company={company} quantity={data.quantity} price={data.price} />
                             )
                             : ""
                     })

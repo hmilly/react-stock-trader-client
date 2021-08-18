@@ -7,10 +7,15 @@ const BuySell = ({ btnName, stockPrice, stockName }) => {
 
     const buyStock = (e, quantity, stockPrice, state, stockName) => {
         e.preventDefault()
-        const equation = state.balance - (quantity * stockPrice).toFixed(2)
-        if (equation > 0) {
-            setBalance(equation)
-            setArr({ stockName: stockName, details: [{ quantity: quantity, price: stockPrice }] })
+        const equation = state.balance - (quantity * stockPrice)
+        
+        if (quantity === 0){
+            console.log("Increase quantity")
+        }else if (equation > 0) {
+            setBalance(equation.toFixed(2))
+            setArr({
+                stockName: stockName,
+                details: [{ quantity: quantity, price: stockPrice }] })
             setQuantity(0)
         } else {
             console.log("not enough money")
