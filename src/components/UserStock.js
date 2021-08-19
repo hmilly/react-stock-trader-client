@@ -9,13 +9,12 @@ const UserStock = ({ company }) => {
         <div className="user-stock">
             <h4 className="stock-name">{company}:</h4>
             <div className="stock-price">
-
                 {state.stockArr.length === 0
                     ? ""
-                    : state.stockArr.map(a => {
-                        return a.stockName.match(company)
-                            ? a.details.map(data =>
-                                <UserStockDetails data={data} />
+                    : state.stockArr.map(arr => {
+                        return arr.company.match(company)
+                            ? arr.details.map(data =>
+                                <UserStockDetails data={data} company={company} />
                             )
                             : ""
                     })

@@ -2,15 +2,12 @@ import React from 'react'
 import CompanyStock from "./CompanyStock"
 
 const Company = ({ stock }) => {
-
-    const injectData = (d) => {
-        return d.map(s =>
-            <CompanyStock
-                companyName={s.stockName}
-                stockPrice={s.currentPrice}
+    
+    const injectData = (data) =>
+        data.map(company =>
+            <CompanyStock company={company.stockName} price={company.currentPrice}
             />
         )
-    }
 
     return (
         <section>

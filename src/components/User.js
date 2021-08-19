@@ -2,15 +2,22 @@ import React, { useContext } from 'react'
 import UserStock from "./UserStock"
 import { store } from "../context"
 
-const User = ({ setName, balance, transactions }) => {
-    const { state } = useContext(store)
+const User = ({ transactions }) => {
+    const { state, setName, setBalance, dispatchArr } = useContext(store)
 
-    const injectData = (t) => {
-        return t.map(s =>
+    const injectData = (transaction) => {
+        return transaction.map(stock =>
             <UserStock
-                company={s.shareName}
+                company={stock.shareName}
             />
         )
+    }
+
+    const resetForm = (e, setBalance, setArr, setName) => {
+        e.preventDefault()
+        setName("")
+        setBalance(5000)
+        setArr([])
     }
 
     return (
@@ -18,7 +25,7 @@ const User = ({ setName, balance, transactions }) => {
             <h2>Details:</h2>
             <div className="user-details">
                 <h3>User:</h3>
-                <input type="text" name="name" placeholder="Name" className="username"
+                <input type="text" name="name" placeholder="Name" className="username" value={state.user}
                     onChange={(e) => { setName(e.target.value) }} />
             </div>
             <div className="user-wallet">
@@ -36,7 +43,7 @@ const User = ({ setName, balance, transactions }) => {
                     : injectData(transactions)}
             </div>
             <div className="user-btns">
-                <button>Reset Form</button>
+                <button onClick={(e) => { resetForm(e, setBalance, dispatchArr, setName) }}>Reset Form</button>
                 <button>Save User</button>
             </div>
         </form>

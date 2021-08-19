@@ -1,6 +1,4 @@
-import React,
-{ createContext, useReducer }
-    from 'react';
+import React, { createContext, useReducer } from 'react';
 
 const initialState = {
     user: "",
@@ -24,15 +22,20 @@ const AppState = ({ children }) => {
                     ...state,
                     balance: action.payload
                 }
+            case 'SETNAME':
+                return {
+                    ...state,
+                    user: action.payload
+                }
             default:
                 return state
         }
     }, initialState);
 
-    const findArrItem = (arr, item) => arr.find(s => s.stockName.match(item))
+    const findArrItem = (arr, item) => arr.find(s => s.company.match(item))
 
     const setArr = (obj) => {
-        const currentStockArr = findArrItem(state.stockArr, obj.stockName)
+        const currentStockArr = findArrItem(state.stockArr, obj.company)
         if (!currentStockArr) {
             dispatchArr([...state.stockArr, { ...obj, details: [{ id: 1, ...obj.details[0] }] }])
         } else {
@@ -45,19 +48,12 @@ const AppState = ({ children }) => {
         }
     }
 
-    const removeFromArr = (data) => {
-        let currentStockArr = findArrItem(state.stockArr, data.company)
+    const removeFromArr = (data, company) => {
+        let currentStockArr = findArrItem(state.stockArr, company)
         const i = currentStockArr.details.indexOf(data)
         currentStockArr.details.splice(i, 1)
-        dispatchArr(state.stockArr)
+        return dispatchArr(state.stockArr)
     }
-
-    const cash = () => {
-
-
-        setBalance()
-    }
-
 
     const dispatchArr = (arr) => {
         dispatch({
@@ -66,21 +62,27 @@ const AppState = ({ children }) => {
         })
     }
 
-    const setBalance = (equation) => {
+    const setBalance = (num) => {
         dispatch({
             type: "SETBALANCE",
-            payload: equation
+            payload: num
         })
     }
-
+    const setName = (name) => {
+        dispatch({
+            type: "SETNAME",
+            payload: name
+        })
+    }
 
     return <Provider
         value={{
             state,
             setArr,
             setBalance,
+            dispatchArr,
             removeFromArr,
-            cash
+            setName
         }}>
         {children} </Provider>;
 };

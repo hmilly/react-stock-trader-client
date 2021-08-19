@@ -1,22 +1,20 @@
-import React, { useState, useContext, componentWillUnmount } from 'react'
+import React, { useContext } from 'react'
 import { store } from "../context"
 
-const UserStockDetails = ({data}) => {
+const UserStockDetails = ({ data, company }) => {
     const { state, setBalance, removeFromArr } = useContext(store)
 
-    const sellStock = (e) => {
-        console.log(data.price)
+    const sellStock = (e, data, company) => {
         e.preventDefault();
-        const equation = state.balance + (data.quantity * data.price)
-        setBalance(equation)
-        removeFromArr(data)
+        const equation = parseFloat(state.balance) + (parseInt(data.quantity) * parseFloat(data.price))
+        setBalance(equation.toFixed(2))
+        removeFromArr(data, company)
     }
-
     return (
         <div>
             <p>{data.quantity}</p>
             <p>{data.price}</p>
-            <button className="Sell" onClick={(e) => sellStock(e)}>Sell</button>
+            <button className="Sell" onClick={(e) => sellStock(e, data, company)}>Sell</button>
         </div>
     )
 }

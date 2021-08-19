@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
+import { store } from "./context"
 import socketIOClient from "socket.io-client";
 import Company from "./components/Company"
 import User from "./components/User"
@@ -8,13 +9,11 @@ const ENDPOINT = "http://127.0.0.1:4001";
 
 function App() {
 
+  const { setName, setBalance, dispatchArr } = useContext(store)
   const [stock, setStock] = useState([]);
   const [closedMsg, setClosedMsg] = useState("")
 
-  const [name, setName] = useState("")
-  const [balance, setBalance] = useState("")
   const [transactions, setTransactions] = useState([])
-
 
   useEffect(() => {
     const socket = socketIOClient(ENDPOINT);
@@ -35,7 +34,6 @@ function App() {
     });
   }, []);
 
-
   return (
     <div className="index">
       <header>
@@ -47,7 +45,7 @@ function App() {
       </header>
       <main>
         <Company stock={stock} />
-        <User name={name} setName={setName} balance={balance} transactions={transactions} />
+        <User transactions={transactions} />
       </main >
     </div>
   );
