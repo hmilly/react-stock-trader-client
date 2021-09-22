@@ -68,6 +68,7 @@ const AppState = ({ children }) => {
             payload: num
         })
     }
+    
     const setName = (name) => {
         dispatch({
             type: "SETNAME",

@@ -2,11 +2,10 @@ import React from 'react'
 import CompanyStock from "./CompanyStock"
 
 const Company = ({ stock }) => {
-    
+
     const injectData = (data) =>
         data.map(company =>
-            <CompanyStock company={company.stockName} price={company.currentPrice}
-            />
+            <CompanyStock company={company.stockName} price={company.currentPrice} />
         )
 
     return (

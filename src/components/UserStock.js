@@ -2,7 +2,7 @@ import React, { useContext} from 'react'
 import { store } from "../context"
 import UserStockDetails from "./UserStockDetails"
 
-const UserStock = ({ company }) => {
+const UserStock = ({ company, stock }) => {
     const { state } = useContext(store)
 
     return (
@@ -14,7 +14,7 @@ const UserStock = ({ company }) => {
                     : state.stockArr.map(arr => {
                         return arr.company.match(company)
                             ? arr.details.map(data =>
-                                <UserStockDetails data={data} company={company} />
+                                <UserStockDetails data={data} company={company} stock={stock} />
                             )
                             : ""
                     })

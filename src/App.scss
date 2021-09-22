@@ -1,72 +1,91 @@
-body, #root{
+body,
+#root {
     background-color: rgb(82, 65, 92);
     color: white;
     text-align: center;
     height: 100vh;
-    .index{
+
+    .index {
         display: grid;
         gap: 1%;
-        header{
+
+        header {
             text-align: center;
-            h1{
+
+            h1 {
                 margin: 15px auto;
             }
-            p{
+
+            p {
                 font-size: 20px;
                 font-weight: bold;
                 margin: 5px auto;
             }
-            h4{
+
+            h4 {
                 color: red;
                 margin: 10px auto;
                 margin-bottom: 20px;
             }
         }
-        main{
+
+        main {
             display: grid;
             gap: 3%;
-            h2{
+
+            h2 {
                 text-decoration: underline;
             }
-            section{
+
+            section {
                 border-radius: 5px;
-                background: rgb(28,43,87);
-                .btns{
+                background: rgb(28, 43, 87);
+
+                .btns {
                     display: grid;
                     grid-template-rows: repeat(1fr);
-                    div{
+
+                    div {
                         display: grid;
                         grid-template-columns: repeat(auto-fit, minmax(15px, 1fr));
-                    input{
-                        color: black;
-                        font-size: 18px;
-                        text-align: center;
+
+                        input {
+                            color: black;
+                            font-size: 18px;
+                            text-align: center;
+                        }
+
+                        input::-webkit-inner-spin-button,
+                        input::-webkit-outer-spin-button {
+                            -webkit-appearance: none;
+                        }
                     }
-                    input::-webkit-inner-spin-button,
-                    input::-webkit-outer-spin-button{
-                        -webkit-appearance:none;
-                    }
-                    }
-                    .Buy{
+
+                    .Buy {
                         background-color: rgb(74, 123, 6);
                     }
-                    .Buy:hover{
+
+                    .Buy:hover {
                         cursor: pointer;
                         background-color: rgba(130, 216, 9, 0.892);
                     }
                 }
-            } 
-            form{
+            }
+
+            form {
                 display: grid;
                 background: rgb(51, 20, 70);
                 border: solid rgb(65, 28, 87) 1px;
                 border-radius: 5px;
-                .user-details, .user-wallet {
-                    display:grid;  
+
+                .user-details,
+                .user-wallet {
+                    display: grid;
                     grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
                     gap: 10px;
                     background-color: rgba(0, 0, 0, 0.275);
-                    input{
+
+                    input {
                         font-size: 18px;
                         color: white;
                         width: 60%;
@@ -79,17 +98,19 @@ body, #root{
                         border-radius: 5px;
                     }
                 }
-                .user-btns{
+
+                .user-btns {
                     background-color: black;
-                    display:grid;  
+                    display: grid;
                     grid-template-columns: repeat(auto-fit,
-                    minmax(120px, 1fr));
+                            minmax(120px, 1fr));
                     grid-template-rows: 50px;
                     gap: 10px;
                     align-items: end;
                     justify-items: center;
                     padding-bottom: 10px;
-                    button{
+
+                    button {
                         height: 30px;
                         width: 80%;
                         cursor: pointer;
@@ -97,70 +118,78 @@ body, #root{
                         color: rgb(227, 181, 253);
                         border: solid rgb(71, 11, 104) 1px;
                     }
-                    button:hover{
+
+                    button:hover {
                         background-color: rgb(52, 13, 73);
                     }
                 }
             }
-        }    
+        }
     }
 }
 
-.stock{
+.stock {
     border: solid 1px rgb(0, 72, 255);
-    background: rgb(28,43,87);
-    background: radial-gradient(circle, rgba(28,43,87,1) 0%,
-    rgba(4,7,98,1) 61%, rgba(0,3,40,1) 100%);
+    background: rgb(28, 43, 87);
+    background: radial-gradient(circle, rgba(28, 43, 87, 1) 0%,
+            rgba(4, 7, 98, 1) 61%, rgba(0, 3, 40, 1) 100%);
 }
-.user-stock{
+
+.user-stock {
     border: solid 1px rgb(191, 0, 255);
-    background: rgb(28,43,87);
+    background: rgb(28, 43, 87);
     background: radial-gradient(circle, rgb(65, 28, 87) 0%,
-    rgb(63, 4, 98) 61%, rgb(15, 0, 40) 100%);
+            rgb(63, 4, 98) 61%, rgb(15, 0, 40) 100%);
 }
-.stock-container{
+
+.stock-container {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(110px, 1fr));
     gap: 10px;
 }
-.stock-name{
+
+.stock-name {
     display: grid;
-    grid-template-columns
-    : repeat(auto-fit, minmax(60px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(60px, 1fr));
     margin: 10px auto;
 }
-.stock-price{
+
+.stock-price {
     display: grid;
-    grid-template-rows
-    : repeat(auto-fit, minmax(1fr));
+    grid-template-rows: repeat(auto-fit, minmax(1fr));
     margin: 10px auto;
-    h4{
-    margin: 10px auto;
+
+    h4 {
+        margin: 10px auto;
     }
-    div{
-    display: grid;
+
+    div {
+        display: grid;
         grid-template-columns: 1fr 1fr 1fr;
         grid-template-rows: 25px;
-        p{
+
+        p {
             margin: 0 auto;
         }
-        button{
+
+        button {
             height: 22px;
             font-size: 14px;
         }
     }
 }
 
-.Sell{
+.Sell {
     color: white;
     background-color: rgb(111, 12, 38);
 }
-.Sell:hover{
+
+.Sell:hover {
     cursor: pointer;
     background-color: rgba(197, 41, 83, 0.8929);
 }
 
-button{
+button {
     font-size: 18px;
     color: white;
     cursor: pointer;
