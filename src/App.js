@@ -3,36 +3,38 @@ import { store } from "./context"
 import socketIOClient from "socket.io-client";
 import Company from "./components/Company"
 import User from "./components/User"
+import { defaultUser } from "./db";
 import './App.scss';
 const ENDPOINT = "http://127.0.0.1:4001";
 // npm start
 
 function App() {
   const { setName, setBalance } = useContext(store)
-
   const [stock, setStock] = useState([]);
   const [closedMsg, setClosedMsg] = useState("")
   const [transactions, setTransactions] = useState([])
 
   useEffect(() => {
     const socket = socketIOClient(ENDPOINT);
-    socket.on("printUser", (userData) => {
-      setName(userData.name)
-      setBalance(userData.balance)
-      setTransactions(userData.transactions)
-    })
     socket.on("updateStock", data => {
       setStock(data);
       console.log(data)
     });
     socket.on("closedMarkets", msg => {
       setClosedMsg(msg)
+      return socket.disconnect()
     });
     socket.on("connect_error", (err) => {
       console.log(`connect_error due to ${err.message}`);
       return socket.disconnect()
     });
-  },[]);
+  }, [setName, setBalance]);
+
+  useEffect(() => {
+    setName(defaultUser.name)
+    setBalance(defaultUser.balance)
+    setTransactions(defaultUser.transactions)
+  }, [setName, setBalance]);
 
   return (
     <div className="index">
@@ -45,7 +47,7 @@ function App() {
       </header>
       <main>
         <Company stock={stock} />
-        <User transactions={transactions} stock={stock} />
+        <User transactions={transactions} setTransactions={setTransactions} stock={stock} />
       </main >
     </div>
   );

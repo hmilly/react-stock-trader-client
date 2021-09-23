@@ -3,7 +3,6 @@ import { store } from "../context"
 
 const UserStockDetails = ({ data, company, stock }) => {
     const { state, setBalance, removeFromArr } = useContext(store)
-    console.log(stock)
 
     const sellStock = (e) => {
         e.preventDefault();

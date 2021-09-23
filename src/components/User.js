@@ -1,8 +1,9 @@
 import React, { useContext } from 'react'
 import UserStock from "./UserStock"
+import { user } from '../db'
 import { store } from "../context"
 
-const User = ({ transactions, stock }) => {
+const User = ({ transactions, setTransactions, stock }) => {
     const { state, setName, setBalance, dispatchArr } = useContext(store)
 
     const injectData = (transaction) => {
@@ -18,8 +19,17 @@ const User = ({ transactions, stock }) => {
         dispatchArr([])
     }
 
-    const saveUser = () => {
+    const saveUser = (e) => {
+        e.preventDefault()
+        //set user 
+        console.log("save")
+    }
 
+    const restoreUser = (e) => {
+        e.preventDefault()
+        setName(user.name)
+        setBalance(user.balance)
+        setTransactions(user.transactions)
     }
 
     return (
@@ -45,7 +55,8 @@ const User = ({ transactions, stock }) => {
                     : injectData(transactions)}
             </div>
             <div className="user-btns">
-                <button onClick={(e) => { resetForm(e) }}>Reset Form</button>
+                <button onClick={(e) => resetForm(e)}>Reset Form</button>
+                <button onClick={(e) => restoreUser(e)}>Restore Last User</button>
                 <button onClick={(e) => saveUser(e)}>Save User</button>
             </div>
         </form>
