@@ -3,38 +3,35 @@ import { store } from "./context"
 import socketIOClient from "socket.io-client";
 import Company from "./components/Company"
 import User from "./components/User"
-import { defaultUser } from "./db";
 import './App.scss';
 const ENDPOINT = "http://127.0.0.1:4001";
 // npm start
 
 function App() {
-  const { setName, setBalance } = useContext(store)
+  const { state, setName, setBalance } = useContext(store)
   const [stock, setStock] = useState([]);
   const [closedMsg, setClosedMsg] = useState("")
   const [transactions, setTransactions] = useState([])
 
   useEffect(() => {
     const socket = socketIOClient(ENDPOINT);
-    socket.on("updateStock", data => {
-      setStock(data);
-      console.log(data)
-    });
-    socket.on("closedMarkets", msg => {
-      setClosedMsg(msg)
-      return socket.disconnect()
-    });
+    socket.on("updateStock", data => setStock(data))
+
+    socket.on("closedMarkets", msg => setClosedMsg(msg));
+
+    socket.on("defaultUser", (userData) => {
+      setName(userData.name)
+      setBalance(userData.balance)
+      setTransactions(userData.transactions)
+    })
+
+    socket.emit('updateUser', `${state.name}`,`${state.balance}`, `${JSON.stringify(transactions)}`)
+
     socket.on("connect_error", (err) => {
       console.log(`connect_error due to ${err.message}`);
       return socket.disconnect()
     });
-  }, [setName, setBalance]);
-
-  useEffect(() => {
-    setName(defaultUser.name)
-    setBalance(defaultUser.balance)
-    setTransactions(defaultUser.transactions)
-  }, [setName, setBalance]);
+  }, []);
 
   return (
     <div className="index">

@@ -1,6 +1,5 @@
 import React, { useContext } from 'react'
 import UserStock from "./UserStock"
-import { user } from '../db'
 import { store } from "../context"
 
 const User = ({ transactions, setTransactions, stock }) => {
@@ -19,17 +18,18 @@ const User = ({ transactions, setTransactions, stock }) => {
         dispatchArr([])
     }
 
-    const saveUser = (e) => {
+    const saveUser = async (e) => {
         e.preventDefault()
-        //set user 
-        console.log("save")
+
+
+
     }
 
     const restoreUser = (e) => {
         e.preventDefault()
-        setName(user.name)
-        setBalance(user.balance)
-        setTransactions(user.transactions)
+        setName(state.name)
+        setBalance(state.balance)
+        setTransactions(state.transactions)
     }
 
     return (
